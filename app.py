@@ -22,6 +22,12 @@ class Item(BaseModel):
 def read_root():
     return {"Hello": "World"}
 
+# http://127.0.0.1:8000/items/?skip=0&limit=10
+@app.get("/items/")
+async def read_item(skip: int = 0, limit: int = 10):
+    return { "skip ": skip, "limit" : limit }
+
+# http://127.0.0.1:8000/5
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
